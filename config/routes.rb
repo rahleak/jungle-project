@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  root to: 'products#index'
+  root to: 'products#index' #root defines the "/" homepage. special string that rails knows how to parse to represent a controller (products) and an action (index)
 
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] #says there should be an endpoint/path to "/products" for the index or show
   resources :categories, only: [:show]
 
   resource :cart, only: [:show] do

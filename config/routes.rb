@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
+
   root to: 'products#index' #root defines the "/" homepage. special string that rails knows how to parse to represent a controller (products) and an action (index)
 
   resources :products, only: [:index, :show] #says there should be an endpoint/path to "/products" for the index or show
+
   resources :categories, only: [:show]
 
   resource :cart, only: [:show] do
@@ -15,7 +17,22 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'dashboard#show'
     resources :products, except: [:edit, :update, :show]
+    resources :categories, only: [:new, :index, :create]
   end
+
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  post 'login', to: 'sessions#create'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  resources :users
+  resources :sessions
+
+
+
+end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -71,4 +88,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

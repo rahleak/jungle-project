@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :users
-  resources :users
-  resources :users
-  root to: 'products#index'
 
-  get '/about' => 'about#index'
-  
-  resources :products, only: [:index, :show]
+  root to: 'products#index' #root defines the "/" homepage. special string that rails knows how to parse to represent a controller (products) and an action (index)
+
+  resources :products, only: [:index, :show] #says there should be an endpoint/path to "/products" for the index or show
+
   resources :categories, only: [:show]
 
   resource :cart, only: [:show] do
